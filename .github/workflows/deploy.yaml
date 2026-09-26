@@ -3,22 +3,22 @@ name: Deploy site
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  id-token: write # lets the job assume the AWS role over OIDC
 
 concurrency:
-  group: pages
+  group: deploy
   cancel-in-progress: false
 
 env:
   HUGO_VERSION: 0.166.0
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,24 +29,39 @@ jobs:
             "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
           sudo dpkg -i "${RUNNER_TEMP}/hugo.deb"
 
-      - id: pages
-        uses: actions/configure-pages@v5
-
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
-        run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --gc --minify
 
-      - uses: actions/upload-pages-artifact@v3
+      # Everything below only runs for main, and only once the repository
+      # variables from aws/README.md are set.
+      - name: Configure AWS credentials
+        if: github.ref == 'refs/heads/main' && vars.AWS_ROLE_ARN != ''
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          path: ./public
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'eu-west-1' }}
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Upload to S3
+        if: github.ref == 'refs/heads/main' && vars.AWS_ROLE_ARN != ''
+        env:
+          BUCKET: ${{ vars.S3_BUCKET }}
+        run: |
+          # Fingerprinted files (CSS and resized images) never change under
+          # the same name, so browsers can keep them forever.
+          aws s3 sync public/ "s3://${BUCKET}/" \
+            --exclude "*" --include "css/*" --include "*_hu_*" \
+            --cache-control "public, max-age=31536000, immutable"
+          # Everything else is revalidated after five minutes. --delete removes
+          # pages that no longer exist; it skips the fingerprinted files above.
+          aws s3 sync public/ "s3://${BUCKET}/" --delete \
+            --exclude "css/*" --exclude "*_hu_*" \
+            --cache-control "public, max-age=300"
+
+      - name: Invalidate CloudFront
+        if: github.ref == 'refs/heads/main' && vars.AWS_ROLE_ARN != ''
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*"

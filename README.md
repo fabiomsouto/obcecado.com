@@ -1,7 +1,9 @@
 # obcecado.com
 
-Source for [obcecado.com](https://obcecado.com), built with [Hugo](https://gohugo.io)
-and deployed to GitHub Pages by `.github/workflows/deploy.yaml` on every push to `main`.
+Source for [obcecado.com](https://obcecado.com), built with [Hugo](https://gohugo.io).
+`.github/workflows/deploy.yaml` builds it on every push and pull request, and on
+`main` deploys it to S3 behind CloudFront. The AWS side is described in
+[`aws/README.md`](aws/README.md).
 
 ## Local preview
 
@@ -18,7 +20,6 @@ Needs Hugo extended, version 0.146 or newer (CI pins the exact version).
 - `layouts/` holds the templates, with no theme. `layouts/product.html` is the
   product page and `layouts/_shortcodes/` has the kits and order blocks.
 - `assets/css/main.css` is the only stylesheet.
-- `static/CNAME` sets the custom domain for GitHub Pages.
 
 The order email address is `params.orderEmail` in `hugo.yaml`.
 

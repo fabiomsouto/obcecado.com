@@ -14,4 +14,4 @@ params:
   description: Small hardware projects, built by hand.
   github: https://github.com/fabiomsouto
   # Where order requests go. Shown on the Phonkyo page as a mailto link.
-  orderEmail: ORDER_EMAIL_PLACEHOLDER
+  orderEmail: phonkyo@obcecado.com
