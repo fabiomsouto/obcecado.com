@@ -10,5 +10,33 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const button = document.querySelector("[data-theme-toggle]");
+    const system = matchMedia("(prefers-color-scheme: dark)");
+    const current = () => root.dataset.theme || (system.matches ? "dark" : "light");
+    // Keep the browser's own chrome (the phone's address bar) on the chosen theme.
+    const metas = document.querySelectorAll('meta[name="theme-color"]');
+    const chrome = () => {
+      if (!root.dataset.theme) return;
+      const colour = root.dataset.theme === "dark" ? "#0a0d0e" : "#eef1f0";
+      metas.forEach((m) => m.setAttribute("content", colour));
+    };
+    const label = () => {
+      chrome();
+      const next = current() === "dark" ? "light" : "dark";
+      button.setAttribute("aria-label", `Switch to ${next} theme`);
+    };
+    button.addEventListener("click", () => {
+      const next = current() === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      label();
+    });
+    system.addEventListener("change", label);
+    label();
+  })();
+  </script>
 </body>
 </html>

@@ -1,22 +1,84 @@
-/* obcecado.com: a hi-fi faceplate, an amber tuner dial, silkscreen labels. */
+/* obcecado.com: a quiet sheet around one lit object, the receiver's display. */
+
+/* Self-hosted, Latin subsets (SIL Open Font License). */
+@font-face {
+  font-family: "Saira";
+  src: url("/fonts/saira-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 50% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DotGothic16";
+  src: url("/fonts/dotgothic16-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-display: block;
+}
 
 :root {
-  --paper: #ecece8;
-  --metal: #d4d5d0;
-  --metal-edge: #b9bab4;
-  --ink: #16181a;
-  --graphite: #55585c;
-  --glass: #1c1915;
-  --amber: #ffb54a;
-  --amber-dim: #a8743a;
-  --needle: #e8512a;
-  --pcb: #1f4a33;
+  --bg: #eef1f0;
+  --sheet: #f8faf9;
+  --ink: #0f1516;
+  --muted: #4d5957;
+  --line: #d3dad8;
+  --accent: #0a7064;
+  --accent-ink: #ffffff;
 
-  --measure: 38rem;
+  /* The display is the same dark glass in both themes. */
+  --glass: #060808;
+  --glass-edge: #1c2527;
+  --vfd: #72f2e2;
+  --vfd-dim: #4a8f87;
+  --vfd-off: #1d3634;
+  --vfd-ghost: #0f1e1d;
+  --bezel: #c9d1cf;
+  /* Dark mode only: a pool of light behind the black board, and a thin rim on its edge. */
+  --stage: none;
+  --rim: drop-shadow(0 0 0 transparent);
+
+  --sans: "Saira", system-ui, sans-serif;
+  --dots: "DotGothic16", ui-monospace, monospace;
+
   --gutter: clamp(1rem, 4vw, 3rem);
   --wide: 72rem;
+  --measure: 40rem;
 
   color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a0d0e;
+    --sheet: #111617;
+    --ink: #e3eae8;
+    --muted: #97a5a2;
+    --line: #232d2e;
+    --accent: #34b3a4;
+    --accent-ink: #03201c;
+    --glass: #030404;
+    --glass-edge: #2c393b;
+    --bezel: #1a2224;
+    --stage: radial-gradient(ellipse 50% 50% at 50% 50%, rgb(150 185 180 / 0.16), transparent 100%);
+    --rim: drop-shadow(0 0 0.5px rgb(190 215 210 / 0.55));
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a0d0e;
+  --sheet: #111617;
+  --ink: #e3eae8;
+  --muted: #97a5a2;
+  --line: #232d2e;
+  --accent: #34b3a4;
+  --accent-ink: #03201c;
+  --glass: #030404;
+  --glass-edge: #2c393b;
+  --bezel: #1a2224;
+  --stage: radial-gradient(ellipse 50% 50% at 50% 50%, rgb(150 185 180 / 0.16), transparent 100%);
+  --rim: drop-shadow(0 0 0.5px rgb(190 215 210 / 0.55));
+  color-scheme: dark;
 }
 
 *,
@@ -31,12 +93,16 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
-  font-family: "Archivo", system-ui, sans-serif;
+  font-family: var(--sans);
   font-size: 1.0625rem;
-  font-variation-settings: "wdth" 100;
-  line-height: 1.55;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 img {
@@ -47,17 +113,20 @@ img {
 
 a {
   color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
+  text-underline-offset: 0.2em;
 }
 
 a:hover {
-  color: var(--pcb);
+  color: var(--accent);
+  text-decoration-color: currentColor;
 }
 
 :focus-visible {
-  outline: 2px solid var(--needle);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .skip {
@@ -69,108 +138,123 @@ a:hover {
   left: var(--gutter);
   top: 0.5rem;
   z-index: 10;
-  background: var(--ink);
-  color: var(--paper);
   padding: 0.5rem 0.75rem;
+  background: var(--ink);
+  color: var(--bg);
 }
 
 /* Type */
 
 .display {
   margin: 0;
-  font-size: clamp(3.5rem, 16vw, 6.25rem);
-  font-variation-settings: "wdth" 125;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.9;
+  font-size: clamp(3.25rem, 11vw, 5.75rem);
+  font-stretch: 110%;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
 }
 
-.prose h2 {
-  margin: 3.5rem 0 1rem;
-  font-size: 1.5rem;
-  font-variation-settings: "wdth" 125;
-  font-weight: 700;
+.product h2,
+.page h1 {
+  margin: 0 0 1rem;
+  font-size: 1.375rem;
+  font-stretch: 108%;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1.25;
+  text-wrap: balance;
 }
 
-.prose h3 {
+.product h3 {
   margin: 0 0 0.25rem;
-  font-size: 1.125rem;
-  font-variation-settings: "wdth" 115;
-  font-weight: 700;
+  font-size: 1.0625rem;
+  font-weight: 600;
 }
 
-.prose p,
-.prose ul {
+.product p,
+.product ul,
+.product ol,
+.page p {
   margin: 0 0 1rem;
 }
 
-.prose ul {
+.product ul,
+.product ol {
   padding-left: 1.25rem;
 }
 
-.prose li + li {
-  margin-top: 0.35rem;
+.product li + li {
+  margin-top: 0.4rem;
 }
 
-.prose code {
+.product li::marker {
+  color: var(--muted);
+}
+
+.product ol li::marker {
+  color: var(--accent);
+  font-family: var(--dots);
+}
+
+.product code {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
-  font-size: 0.9em;
+  font-size: 0.875em;
 }
 
-/* The board's own silkscreen labels: a solid box, text knocked out. */
-.tag {
-  display: inline-block;
-  padding: 0.05em 0.4em;
-  background: var(--ink);
-  color: var(--paper);
-  font-variation-settings: "wdth" 110;
+.product strong {
   font-weight: 600;
-  font-size: 0.95rem;
-  line-height: 1.4;
 }
 
 .button {
   display: inline-block;
-  padding: 0.7rem 1.2rem;
-  border-radius: 999px;
-  background: var(--ink);
-  color: var(--paper);
-  font-variation-settings: "wdth" 110;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-ink);
   font-weight: 600;
+  line-height: 1.2;
   text-decoration: none;
-  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.35);
+  transition: filter 0.2s ease-out;
 }
 
 .button:hover {
-  background: var(--pcb);
-  color: var(--paper);
+  color: var(--accent-ink);
+  filter: brightness(1.12);
+}
+
+/* Secondary action: outlined, for links that aren't the order. */
+.button-quiet {
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--accent);
+}
+
+.button-quiet:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+  filter: none;
 }
 
 /* Masthead and footer */
 
 .masthead {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
   max-width: var(--wide);
   margin: 0 auto;
-  padding: 1.25rem var(--gutter);
+  padding: 1rem var(--gutter);
 }
 
 .wordmark {
-  font-variation-settings: "wdth" 125;
-  font-weight: 800;
-  font-size: 1.125rem;
-  letter-spacing: -0.01em;
+  margin-right: auto;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 
 .wordmark span {
-  color: var(--graphite);
+  color: var(--muted);
   font-weight: 500;
 }
 
@@ -180,13 +264,64 @@ a:hover {
 }
 
 .masthead nav a {
+  color: var(--muted);
   text-decoration: none;
-  color: var(--graphite);
 }
 
 .masthead nav a[aria-current="page"] {
   color: var(--ink);
-  text-decoration: underline;
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: -0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--ink);
+  background: var(--sheet);
+}
+
+.theme-toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Show the icon of the theme you would switch to. */
+.icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .icon-sun {
+    display: block;
+  }
+
+  :root:not([data-theme="light"]) .icon-moon {
+    display: none;
+  }
 }
 
 .colophon {
@@ -195,10 +330,10 @@ a:hover {
   justify-content: space-between;
   gap: 0.5rem 2rem;
   max-width: var(--wide);
-  margin: 6rem auto 0;
+  margin: 5rem auto 0;
   padding: 1.5rem var(--gutter) 2.5rem;
-  border-top: 1px solid var(--metal-edge);
-  color: var(--graphite);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
   font-size: 0.9375rem;
 }
 
@@ -206,37 +341,25 @@ a:hover {
   margin: 0;
 }
 
-/* Hero: a receiver faceplate in brushed aluminium. */
+/* Hero */
 
 .hero {
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgb(255 255 255 / 0.22) 0 1px,
-      transparent 1px 3px,
-      rgb(0 0 0 / 0.025) 3px 4px
-    ),
-    linear-gradient(180deg, #dfe0db, var(--metal) 60%, #c9cac5);
-  border-top: 1px solid #f7f7f4;
-  border-bottom: 1px solid var(--metal-edge);
-  box-shadow: 0 1px 0 #f7f7f4;
-}
-
-.hero-inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
+  gap: 1.5rem 3rem;
   align-items: center;
   max-width: var(--wide);
   margin: 0 auto;
-  padding: clamp(2rem, 6vw, 4.5rem) var(--gutter) 1rem;
+  padding: clamp(1.5rem, 5vw, 4rem) var(--gutter) 0;
 }
 
 .lede {
-  max-width: 26ch;
+  max-width: 28ch;
   margin: 1.25rem 0 1.75rem;
-  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
-  line-height: 1.3;
+  font-size: clamp(1.1875rem, 2.2vw, 1.4375rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 .cta {
@@ -248,25 +371,22 @@ a:hover {
 }
 
 .cta-note {
-  color: var(--graphite);
+  color: var(--muted);
   font-size: 0.9375rem;
 }
 
 .hero-board {
-  position: relative;
   margin: 0;
+  background: var(--stage);
 }
 
-.hero-board figcaption {
-  position: absolute;
-  right: 6%;
-  bottom: 8%;
+.hero-board img {
+  filter: var(--rim) drop-shadow(0 24px 28px rgb(0 0 0 / 0.18));
 }
 
 @media (min-width: 60rem) {
-  .hero-inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 3rem;
+  .hero {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   }
 
   .hero-board {
@@ -274,198 +394,705 @@ a:hover {
   }
 }
 
-/* The tuner dial: the one lit thing on the page. */
+/* The display: dark glass, a dot-matrix readout, input indicators. */
 
-.dial {
-  --at: 0;
-  max-width: var(--wide);
-  margin: 0 auto;
-  padding: 0 var(--gutter) clamp(2rem, 5vw, 3.5rem);
+.vfd {
+  grid-column: 1 / -1;
+  margin-top: clamp(0.5rem, 2vw, 1.5rem);
 }
 
-.dial-window {
-  position: relative;
-  padding: 1.1rem 0 0.6rem;
-  border-radius: 6px;
+.vfd-glass {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem 1.5rem;
+  align-items: end;
+  padding: clamp(0.9rem, 2.5vw, 1.4rem) clamp(1rem, 3.5vw, 2.25rem) clamp(0.9rem, 2.5vw, 1.25rem);
+  border-radius: 10px;
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.06), transparent 40%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent 45%),
     var(--glass);
+  /* Glass edge, then a bezel ring, so the display reads as an object on either sheet. */
   box-shadow:
-    inset 0 2px 6px rgb(0 0 0 / 0.7),
-    0 1px 0 #f7f7f4;
+    inset 0 0 0 1px var(--glass-edge),
+    inset 0 2px 10px rgb(0 0 0 / 0.8),
+    0 0 0 5px var(--bezel),
+    0 14px 30px -18px rgb(0 0 0 / 0.55);
+  color: var(--vfd);
+  font-family: var(--dots);
+}
+
+/* Indicator legend along the top: a few lit, the rest drawn unlit. */
+.vfd-flags {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0 0 0.25rem;
+  color: var(--vfd-off);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
+.vfd-flags .is-lit {
+  color: var(--vfd);
+  text-shadow: 0 0 8px rgb(114 242 226 / 0.5);
+}
+
+.vfd-readout,
+.vfd-source {
+  margin: 0;
+  /* Unlit dots behind the characters, like the grid of a real VFD. */
+  background: radial-gradient(circle, var(--vfd-ghost) 0.9px, transparent 1.3px) 0 0 / 5px 5px;
+  white-space: nowrap;
   overflow: hidden;
+  text-shadow: 0 0 14px rgb(114 242 226 / 0.45);
 }
 
-.dial-scale {
-  position: absolute;
-  inset: 0.55rem 1rem auto;
-  height: 0.55rem;
-  background:
-    repeating-linear-gradient(90deg, var(--amber-dim) 0 1px, transparent 1px 12px),
-    repeating-linear-gradient(90deg, var(--amber) 0 2px, transparent 2px 60px);
-  background-size: 100% 55%, 100% 100%;
-  background-repeat: repeat-x;
-  background-position: 0 100%, 0 0;
-  opacity: 0.8;
+.vfd-readout {
+  font-size: clamp(2.25rem, 9vw, 4.5rem);
+  letter-spacing: 0.08em;
+  line-height: 1.15;
 }
 
-.dial-stops {
+.vfd-source {
+  min-width: 8ch;
+  font-size: clamp(1rem, 3.2vw, 1.75rem);
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-align: right;
+}
+
+.vfd.is-standby .vfd-readout {
+  color: var(--vfd-dim);
+  text-shadow: none;
+}
+
+/* The bottom row links to sections of the page; each lights up like an input. */
+.vfd-links {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(var(--stops), minmax(0, 1fr));
-  padding: 0 1rem;
+  gap: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--glass-edge);
 }
 
-.dial-stops button {
+.vfd-links a {
   position: relative;
-  z-index: 1;
-  padding: 0.55rem 0.25rem 0.4rem;
-  border: 0;
-  background: none;
-  color: var(--amber-dim);
-  font: inherit;
-  font-variation-settings: "wdth" 115;
-  font-weight: 600;
-  font-size: clamp(0.875rem, 2.6vw, 1.125rem);
-  cursor: pointer;
+  padding: 0.5rem 0.25rem 0.75rem;
+  border-radius: 4px;
+  color: var(--vfd-dim);
+  font-size: clamp(0.75rem, 2.4vw, 1rem);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.15s ease-out, text-shadow 0.15s ease-out;
 }
 
-.dial-stops button:hover,
-.dial-stops button[aria-selected="true"] {
-  color: var(--amber);
-  text-shadow: 0 0 12px rgb(255 181 74 / 0.55);
-}
-
-.dial-stops button:focus-visible {
-  outline-color: var(--amber);
-  outline-offset: -4px;
-}
-
-.dial-needle {
+/* The segment under each link, unlit until you point at it. */
+.vfd-links a::after {
+  content: "";
   position: absolute;
-  top: 0.2rem;
-  bottom: 0.2rem;
-  left: calc(1rem + (100% - 2rem) * (var(--at) + 0.5) / var(--stops));
-  width: 2px;
-  margin-left: -1px;
-  background: var(--needle);
-  box-shadow: 0 0 8px rgb(232 81 42 / 0.8);
-  pointer-events: none;
+  left: 30%;
+  right: 30%;
+  bottom: 0.25rem;
+  height: 3px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.35;
+  transition: opacity 0.15s ease-out, box-shadow 0.15s ease-out;
 }
 
-.dial.is-live .dial-needle {
-  transition: left 0.45s cubic-bezier(0.3, 1.3, 0.5, 1);
+.vfd-links a:hover,
+.vfd-links a:focus-visible {
+  color: var(--vfd);
+  text-shadow: 0 0 8px rgb(114 242 226 / 0.5);
 }
 
-.dial-readout {
-  min-height: 1.55em;
-  margin: 0.75rem 0 0;
-  color: var(--graphite);
+.vfd-links a:hover::after,
+.vfd-links a:focus-visible::after {
+  opacity: 1;
+  box-shadow: 0 0 8px rgb(114 242 226 / 0.7);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .dial.is-live .dial-needle {
-    transition: none;
+.vfd-links a:focus-visible {
+  outline-color: var(--vfd);
+  outline-offset: -2px;
+}
+
+.vfd-text {
+  max-width: 44rem;
+  margin: 0.9rem 0 0;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-/* Body copy */
-
-.product,
-.page,
-.intro .prose {
-  max-width: calc(var(--measure) + 2 * var(--gutter));
-  padding: 0 var(--gutter);
+.block > h2 {
+  scroll-margin-top: 1.5rem;
 }
+
+/* Body: each section is a row, heading on the left from tablet width up. */
 
 .product,
 .page {
+  max-width: var(--wide);
   margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
-.page h1 {
-  margin: 3rem 0 1rem;
-  font-size: 2.5rem;
-  font-variation-settings: "wdth" 125;
-  font-weight: 800;
-  line-height: 1;
+.page {
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  padding-top: 3rem;
 }
+
+.block {
+  padding: 3rem 0 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.product .block:first-child {
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+@media (min-width: 56rem) {
+  .block {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, var(--measure));
+    column-gap: clamp(2rem, 5vw, 5rem);
+    align-content: start;
+  }
+
+  .block > * {
+    grid-column: 2;
+  }
+
+  .block > h2 {
+    grid-column: 1;
+    grid-row: 1 / span 20;
+    align-self: start;
+    margin-top: -0.1rem;
+  }
+}
+
+/* Guide: a long how-to. Steps listed on the left from tablet width up. */
+
+.guide {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.guide-head {
+  padding: clamp(1.5rem, 5vw, 4rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-head h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 7vw, 3.75rem);
+  font-stretch: 110%;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.guide-head .lede {
+  max-width: 34ch;
+  margin-bottom: 0;
+}
+
+.guide-toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-toc a {
+  display: block;
+  padding: 0.3rem 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.guide-toc a:hover {
+  color: var(--accent);
+}
+
+/* On phones the step list is a compact index above the text. */
+.guide-toc {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-toc ul {
+  columns: 2;
+  column-gap: 1.5rem;
+}
+
+.guide-text {
+  padding-top: 2rem;
+  counter-reset: step;
+}
+
+.guide-text > p,
+.guide-text > ul,
+.guide-text > ol,
+.guide-text > pre {
+  margin: 0 0 1rem;
+}
+
+.guide-text ul {
+  padding-left: 1.25rem;
+}
+
+.guide-text li + li {
+  margin-top: 0.35rem;
+}
+
+.guide-text li::marker {
+  color: var(--muted);
+}
+
+.guide-text strong {
+  font-weight: 600;
+}
+
+/* Every section after the intro is a step, numbered like a display would. */
+.guide-text h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 3rem 0 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  font-size: 1.375rem;
+  font-stretch: 108%;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  scroll-margin-top: 1rem;
+}
+
+.guide-text h2::before {
+  counter-increment: step;
+  content: counter(step, decimal-leading-zero);
+  color: var(--accent);
+  font-family: var(--dots);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.guide-text code {
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  background: var(--sheet);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+.guide-text pre {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--sheet);
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+/* Copy button, added by script, sitting in the block's top-right corner. */
+.codeblock {
+  position: relative;
+  margin: 0 0 1rem;
+}
+
+.guide-text .codeblock pre {
+  margin: 0;
+  padding-right: 5.5rem;
+}
+
+/* Flush in the corner, on the block's own fill, with a soft edge on the left
+   so long lines that scroll sideways slide under it cleanly. */
+.copy {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  padding: 0.45rem 0.75rem;
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0 7px 0 6px;
+  background: var(--sheet);
+  box-shadow: -14px 0 12px -2px var(--sheet);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+.copy:hover {
+  color: var(--ink);
+}
+
+.copy.is-done {
+  color: var(--accent);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.guide-text pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+  overflow-wrap: normal;
+}
+
+@media (min-width: 56rem) {
+  .guide-body {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, var(--measure));
+    column-gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .guide-toc {
+    position: sticky;
+    top: 1.5rem;
+    padding: 2.25rem 0 0;
+    border: 0;
+  }
+
+  .guide-toc ul {
+    columns: auto;
+  }
+}
+
+/* Board figure */
 
 .board-figure {
-  margin: 1.5rem 0 1.75rem;
+  margin: 0 0 1.75rem;
+  background: var(--stage);
 }
 
-.board-figure figcaption {
-  margin-top: 0.5rem;
-  color: var(--graphite);
+.board-figure img {
+  filter: var(--rim);
+}
+
+.board-figure figcaption,
+.hookup figcaption {
+  margin-top: 0.6rem;
+  color: var(--muted);
   font-size: 0.875rem;
 }
 
-@media (min-width: 60rem) {
-  .board-figure {
-    margin-left: -6rem;
-    margin-right: -6rem;
+/* Hookup: phone to Pi to receiver, drawn like cables between boxes. */
+
+.hookup {
+  margin: 1.75rem 0 2rem;
+}
+
+.hookup-chain {
+  display: grid;
+  justify-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product .hookup-chain li + li {
+  margin-top: 0;
+}
+
+.hookup-node {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--sheet);
+  line-height: 1.3;
+}
+
+.hookup-node.is-board {
+  border-color: var(--glass-edge);
+  background: var(--glass);
+  color: var(--vfd);
+}
+
+.hookup-name {
+  font-weight: 600;
+}
+
+.hookup-note {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.is-board .hookup-note {
+  color: #7fb3ac;
+}
+
+/* A link is one cable, or two side by side. Stacked, they run downwards. */
+.hookup-link {
+  display: grid;
+  gap: 0.3rem;
+  margin-left: 1.5rem;
+  padding: 0.7rem 0 0.7rem 1rem;
+  border-left: 2px solid var(--ink);
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+.hookup-link.is-wireless {
+  border-left-style: dashed;
+}
+
+.hookup-link.is-pair {
+  border-left-style: double;
+  border-left-width: 6px;
+}
+
+.hookup-link b {
+  display: inline-block;
+  min-width: 2.6rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+@media (min-width: 48rem) {
+  .hookup-chain {
+    grid-template-columns: minmax(8.5rem, auto) minmax(3rem, 0.5fr) minmax(9.5rem, auto) minmax(max-content, 1fr) minmax(7.5rem, auto);
+    align-items: center;
+    justify-items: stretch;
   }
 
-  .board-figure figcaption {
-    margin-left: 6rem;
+  .hookup-node {
+    align-self: stretch;
+    align-content: center;
+  }
+
+  /* Label above the cable, a second label (or nothing) below it, so the
+     cable always meets the boxes at their middle. */
+  .hookup-link {
+    grid-template-rows: 1fr auto 1fr;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0 0.75rem;
+    border: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .hookup-link.is-wireless,
+  .hookup-link.is-pair {
+    border-left: 0;
+  }
+
+  .hookup-link > :first-child {
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .hookup-link > :nth-child(2) {
+    grid-row: 3;
+    align-self: start;
+  }
+
+  .hookup-link::after {
+    content: "";
+    grid-row: 2;
+    grid-column: 1;
+    margin: 0 -0.75rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .hookup-link.is-wireless::after {
+    border-bottom-style: dashed;
+  }
+
+  .hookup-link.is-pair::after {
+    border-bottom: 6px double var(--ink);
+  }
+
+  .hookup-link b {
+    min-width: 0;
+    margin-right: 0.25rem;
   }
 }
+
+/* Kits: lettered variants. The one you can order is drawn solid. */
 
 .kits {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 0 2rem;
+  gap: 1rem;
+  align-items: start;
   margin: 0 0 1.25rem;
 }
 
 .kit {
-  padding: 1rem 0 0.25rem;
-  border-top: 3px solid var(--ink);
+  padding: 1.25rem 1.25rem 0.5rem;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: var(--sheet);
 }
 
-.kit-price {
-  font-variation-settings: "wdth" 115;
+.product .kit-price {
+  margin-bottom: 0.75rem;
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .kit.is-unavailable {
-  border-top-color: var(--metal-edge);
-  color: var(--graphite);
+  border: 1px dashed var(--muted);
+  background: none;
+  color: var(--muted);
 }
 
-.prose table {
-  width: 100%;
+/* Compatibility: lit lamp for yes, an unlit ring for no. */
+
+.compat {
   margin: 0 0 1rem;
+  overflow-x: auto;
+}
+
+.compat table {
+  width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
 }
 
-.prose th,
-.prose td {
-  padding: 0.5rem 0.75rem 0.5rem 0;
-  border-bottom: 1px solid var(--metal-edge);
+.compat th,
+.compat td {
+  padding: 0.6rem 1rem 0.6rem 0;
+  border-bottom: 1px solid var(--line);
   text-align: left;
-  vertical-align: top;
-}
-
-.prose th {
-  font-variation-settings: "wdth" 110;
-  font-weight: 600;
-}
-
-.prose td:first-child {
+  vertical-align: middle;
   white-space: nowrap;
 }
 
-/* Wide tables scroll inside themselves, never the page. */
-.prose table {
-  display: block;
-  overflow-x: auto;
+.compat thead th {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.compat tbody th {
+  font-weight: 600;
+}
+
+.lamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--muted);
+}
+
+.lamp::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.lamp.is-lit {
+  color: var(--ink);
+}
+
+.lamp.is-lit::before {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 60%, transparent);
+  opacity: 1;
+}
+
+.note-ref {
+  margin-left: 0.1rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.product .compat-note {
+  margin-top: -0.25rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.compat-note span {
+  color: var(--accent);
+}
+
+/* On phones each receiver becomes a short list: feature on the left, lamp on the right. */
+@media (max-width: 39.99rem) {
+  .compat thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .compat table,
+  .compat tbody,
+  .compat tr,
+  .compat th,
+  .compat td {
+    display: block;
+  }
+
+  .compat tbody th {
+    padding-top: 0;
+  }
+
+  .compat td {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0;
+  }
+
+  .compat td::before {
+    content: attr(data-label);
+    color: var(--muted);
+  }
+}
+
+/* Ordering */
+
+.order p:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
 }
 
 .order-address {
-  margin-left: 0.75rem;
-  color: var(--graphite);
+  color: var(--muted);
 }
 
 /* Home */
@@ -477,10 +1104,14 @@ a:hover {
 }
 
 .intro .prose {
-  padding: 0;
+  max-width: 34rem;
   margin-top: 1.25rem;
-  font-size: 1.25rem;
+  font-size: clamp(1.1875rem, 2.2vw, 1.375rem);
   line-height: 1.4;
+}
+
+.intro .prose p {
+  margin: 0;
 }
 
 .projects {
@@ -495,18 +1126,17 @@ a:hover {
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem 2rem;
   align-items: center;
-  padding: 1.5rem;
-  border-radius: 6px;
-  background:
-    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.22) 0 1px, transparent 1px 3px),
-    var(--metal);
-  border: 1px solid var(--metal-edge);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--sheet);
   text-decoration: none;
+  transition: border-color 0.2s ease-out;
 }
 
 .project:hover {
   color: inherit;
-  border-color: var(--graphite);
+  border-color: var(--accent);
 }
 
 .project-text {
@@ -515,21 +1145,34 @@ a:hover {
 }
 
 .project-name {
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  font-variation-settings: "wdth" 125;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-stretch: 110%;
+  font-weight: 600;
+  letter-spacing: -0.025em;
   line-height: 1;
 }
 
 .project-summary {
-  max-width: 30ch;
-  font-size: 1.125rem;
-  line-height: 1.35;
+  max-width: 32ch;
+  color: var(--muted);
+  font-size: 1.0625rem;
+  line-height: 1.45;
 }
 
 @media (min-width: 48rem) {
   .project {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .project img {
+    order: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
   }
 }

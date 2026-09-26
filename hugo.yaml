@@ -8,6 +8,13 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  # Plain <pre><code> blocks, styled by main.css in both themes.
+  highlight:
+    codeFences: false
+  tableOfContents:
+    startLevel: 2
+    endLevel: 2
+    ordered: false
 
 params:
   author: Fabio Souto

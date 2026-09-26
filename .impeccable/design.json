@@ -1,0 +1,578 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-26T14:31:36+00:00",
+  "title": "Design System: obcecado",
+  "extensions": {
+    "colorMeta": {
+      "deep-teal": {
+        "role": "primary",
+        "displayName": "Deep Teal",
+        "canonical": "#0a7064",
+        "tonalRamp": [
+          "oklch(15% 0.085 182)",
+          "oklch(26% 0.085 182)",
+          "oklch(38% 0.085 182)",
+          "oklch(50% 0.085 182)",
+          "oklch(62% 0.085 182)",
+          "oklch(74% 0.085 182)",
+          "oklch(85% 0.085 182)",
+          "oklch(95% 0.085 182)"
+        ]
+      },
+      "deep-teal-dark": {
+        "role": "primary",
+        "displayName": "Deep Teal (dark theme)",
+        "canonical": "#34b3a4",
+        "tonalRamp": [
+          "oklch(15% 0.110 184)",
+          "oklch(26% 0.110 184)",
+          "oklch(38% 0.110 184)",
+          "oklch(50% 0.110 184)",
+          "oklch(62% 0.110 184)",
+          "oklch(74% 0.110 184)",
+          "oklch(85% 0.110 184)",
+          "oklch(95% 0.110 184)"
+        ]
+      },
+      "deep-teal-ink": {
+        "role": "primary",
+        "displayName": "Deep Teal Ink",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(26% 0.000 90)",
+          "oklch(38% 0.000 90)",
+          "oklch(50% 0.000 90)",
+          "oklch(62% 0.000 90)",
+          "oklch(74% 0.000 90)",
+          "oklch(85% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "deep-teal-ink-dark": {
+        "role": "primary",
+        "displayName": "Deep Teal Ink (dark theme)",
+        "canonical": "#03201c",
+        "tonalRamp": [
+          "oklch(15% 0.036 182)",
+          "oklch(26% 0.036 182)",
+          "oklch(38% 0.036 182)",
+          "oklch(50% 0.036 182)",
+          "oklch(62% 0.036 182)",
+          "oklch(74% 0.036 182)",
+          "oklch(85% 0.036 182)",
+          "oklch(95% 0.036 182)"
+        ]
+      },
+      "cool-ground": {
+        "role": "neutral",
+        "displayName": "Cool Ground",
+        "canonical": "#eef1f0",
+        "tonalRamp": [
+          "oklch(15% 0.003 174)",
+          "oklch(26% 0.003 174)",
+          "oklch(38% 0.003 174)",
+          "oklch(50% 0.003 174)",
+          "oklch(62% 0.003 174)",
+          "oklch(74% 0.003 174)",
+          "oklch(85% 0.003 174)",
+          "oklch(95% 0.003 174)"
+        ]
+      },
+      "cool-ground-dark": {
+        "role": "neutral",
+        "displayName": "Cool Ground (dark theme)",
+        "canonical": "#0a0d0e",
+        "tonalRamp": [
+          "oklch(15% 0.005 220)",
+          "oklch(26% 0.005 220)",
+          "oklch(38% 0.005 220)",
+          "oklch(50% 0.005 220)",
+          "oklch(62% 0.005 220)",
+          "oklch(74% 0.005 220)",
+          "oklch(85% 0.005 220)",
+          "oklch(95% 0.005 220)"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet",
+        "canonical": "#f8faf9",
+        "tonalRamp": [
+          "oklch(15% 0.002 165)",
+          "oklch(26% 0.002 165)",
+          "oklch(38% 0.002 165)",
+          "oklch(50% 0.002 165)",
+          "oklch(62% 0.002 165)",
+          "oklch(74% 0.002 165)",
+          "oklch(85% 0.002 165)",
+          "oklch(95% 0.002 165)"
+        ]
+      },
+      "sheet-dark": {
+        "role": "neutral",
+        "displayName": "Sheet (dark theme)",
+        "canonical": "#111617",
+        "tonalRamp": [
+          "oklch(15% 0.008 211)",
+          "oklch(26% 0.008 211)",
+          "oklch(38% 0.008 211)",
+          "oklch(50% 0.008 211)",
+          "oklch(62% 0.008 211)",
+          "oklch(74% 0.008 211)",
+          "oklch(85% 0.008 211)",
+          "oklch(95% 0.008 211)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#0f1516",
+        "tonalRamp": [
+          "oklch(15% 0.009 209)",
+          "oklch(26% 0.009 209)",
+          "oklch(38% 0.009 209)",
+          "oklch(50% 0.009 209)",
+          "oklch(62% 0.009 209)",
+          "oklch(74% 0.009 209)",
+          "oklch(85% 0.009 209)",
+          "oklch(95% 0.009 209)"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark theme)",
+        "canonical": "#e3eae8",
+        "tonalRamp": [
+          "oklch(15% 0.008 177)",
+          "oklch(26% 0.008 177)",
+          "oklch(38% 0.008 177)",
+          "oklch(50% 0.008 177)",
+          "oklch(62% 0.008 177)",
+          "oklch(74% 0.008 177)",
+          "oklch(85% 0.008 177)",
+          "oklch(95% 0.008 177)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#4d5957",
+        "tonalRamp": [
+          "oklch(15% 0.015 185)",
+          "oklch(26% 0.015 185)",
+          "oklch(38% 0.015 185)",
+          "oklch(50% 0.015 185)",
+          "oklch(62% 0.015 185)",
+          "oklch(74% 0.015 185)",
+          "oklch(85% 0.015 185)",
+          "oklch(95% 0.015 185)"
+        ]
+      },
+      "muted-dark": {
+        "role": "neutral",
+        "displayName": "Muted (dark theme)",
+        "canonical": "#97a5a2",
+        "tonalRamp": [
+          "oklch(15% 0.016 182)",
+          "oklch(26% 0.016 182)",
+          "oklch(38% 0.016 182)",
+          "oklch(50% 0.016 182)",
+          "oklch(62% 0.016 182)",
+          "oklch(74% 0.016 182)",
+          "oklch(85% 0.016 182)",
+          "oklch(95% 0.016 182)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#d3dad8",
+        "tonalRamp": [
+          "oklch(15% 0.008 177)",
+          "oklch(26% 0.008 177)",
+          "oklch(38% 0.008 177)",
+          "oklch(50% 0.008 177)",
+          "oklch(62% 0.008 177)",
+          "oklch(74% 0.008 177)",
+          "oklch(85% 0.008 177)",
+          "oklch(95% 0.008 177)"
+        ]
+      },
+      "hairline-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark theme)",
+        "canonical": "#232d2e",
+        "tonalRamp": [
+          "oklch(15% 0.014 204)",
+          "oklch(26% 0.014 204)",
+          "oklch(38% 0.014 204)",
+          "oklch(50% 0.014 204)",
+          "oklch(62% 0.014 204)",
+          "oklch(74% 0.014 204)",
+          "oklch(85% 0.014 204)",
+          "oklch(95% 0.014 204)"
+        ]
+      },
+      "glass": {
+        "role": "neutral",
+        "displayName": "Glass",
+        "canonical": "#060808",
+        "tonalRamp": [
+          "oklch(15% 0.004 197)",
+          "oklch(26% 0.004 197)",
+          "oklch(38% 0.004 197)",
+          "oklch(50% 0.004 197)",
+          "oklch(62% 0.004 197)",
+          "oklch(74% 0.004 197)",
+          "oklch(85% 0.004 197)",
+          "oklch(95% 0.004 197)"
+        ]
+      },
+      "glass-dark": {
+        "role": "neutral",
+        "displayName": "Glass (dark theme)",
+        "canonical": "#030404",
+        "tonalRamp": [
+          "oklch(15% 0.003 197)",
+          "oklch(26% 0.003 197)",
+          "oklch(38% 0.003 197)",
+          "oklch(50% 0.003 197)",
+          "oklch(62% 0.003 197)",
+          "oklch(74% 0.003 197)",
+          "oklch(85% 0.003 197)",
+          "oklch(95% 0.003 197)"
+        ]
+      },
+      "glass-edge": {
+        "role": "neutral",
+        "displayName": "Glass Edge",
+        "canonical": "#1c2527",
+        "tonalRamp": [
+          "oklch(15% 0.013 213)",
+          "oklch(26% 0.013 213)",
+          "oklch(38% 0.013 213)",
+          "oklch(50% 0.013 213)",
+          "oklch(62% 0.013 213)",
+          "oklch(74% 0.013 213)",
+          "oklch(85% 0.013 213)",
+          "oklch(95% 0.013 213)"
+        ]
+      },
+      "glass-edge-dark": {
+        "role": "neutral",
+        "displayName": "Glass Edge (dark theme)",
+        "canonical": "#2c393b",
+        "tonalRamp": [
+          "oklch(15% 0.018 208)",
+          "oklch(26% 0.018 208)",
+          "oklch(38% 0.018 208)",
+          "oklch(50% 0.018 208)",
+          "oklch(62% 0.018 208)",
+          "oklch(74% 0.018 208)",
+          "oklch(85% 0.018 208)",
+          "oklch(95% 0.018 208)"
+        ]
+      },
+      "bezel": {
+        "role": "neutral",
+        "displayName": "Bezel",
+        "canonical": "#c9d1cf",
+        "tonalRamp": [
+          "oklch(15% 0.009 180)",
+          "oklch(26% 0.009 180)",
+          "oklch(38% 0.009 180)",
+          "oklch(50% 0.009 180)",
+          "oklch(62% 0.009 180)",
+          "oklch(74% 0.009 180)",
+          "oklch(85% 0.009 180)",
+          "oklch(95% 0.009 180)"
+        ]
+      },
+      "bezel-dark": {
+        "role": "neutral",
+        "displayName": "Bezel (dark theme)",
+        "canonical": "#1a2224",
+        "tonalRamp": [
+          "oklch(15% 0.012 215)",
+          "oklch(26% 0.012 215)",
+          "oklch(38% 0.012 215)",
+          "oklch(50% 0.012 215)",
+          "oklch(62% 0.012 215)",
+          "oklch(74% 0.012 215)",
+          "oklch(85% 0.012 215)",
+          "oklch(95% 0.012 215)"
+        ]
+      },
+      "vfd-phosphor": {
+        "role": "secondary",
+        "displayName": "VFD Phosphor",
+        "canonical": "#72f2e2",
+        "tonalRamp": [
+          "oklch(15% 0.116 184)",
+          "oklch(26% 0.116 184)",
+          "oklch(38% 0.116 184)",
+          "oklch(50% 0.116 184)",
+          "oklch(62% 0.116 184)",
+          "oklch(74% 0.116 184)",
+          "oklch(85% 0.116 184)",
+          "oklch(95% 0.116 184)"
+        ]
+      },
+      "vfd-dim": {
+        "role": "secondary",
+        "displayName": "VFD Dim",
+        "canonical": "#4a8f87",
+        "tonalRamp": [
+          "oklch(15% 0.071 186)",
+          "oklch(26% 0.071 186)",
+          "oklch(38% 0.071 186)",
+          "oklch(50% 0.071 186)",
+          "oklch(62% 0.071 186)",
+          "oklch(74% 0.071 186)",
+          "oklch(85% 0.071 186)",
+          "oklch(95% 0.071 186)"
+        ]
+      },
+      "vfd-off": {
+        "role": "secondary",
+        "displayName": "VFD Off",
+        "canonical": "#1d3634",
+        "tonalRamp": [
+          "oklch(15% 0.031 189)",
+          "oklch(26% 0.031 189)",
+          "oklch(38% 0.031 189)",
+          "oklch(50% 0.031 189)",
+          "oklch(62% 0.031 189)",
+          "oklch(74% 0.031 189)",
+          "oklch(85% 0.031 189)",
+          "oklch(95% 0.031 189)"
+        ]
+      },
+      "vfd-ghost": {
+        "role": "secondary",
+        "displayName": "VFD Ghost",
+        "canonical": "#0f1e1d",
+        "tonalRamp": [
+          "oklch(15% 0.021 190)",
+          "oklch(26% 0.021 190)",
+          "oklch(38% 0.021 190)",
+          "oklch(50% 0.021 190)",
+          "oklch(62% 0.021 190)",
+          "oklch(74% 0.021 190)",
+          "oklch(85% 0.021 190)",
+          "oklch(95% 0.021 190)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The page name, one per page."
+      },
+      "headline": {
+        "displayName": "Lede",
+        "purpose": "One-line promise under the display; home intro prose."
+      },
+      "title": {
+        "displayName": "Section Title",
+        "purpose": "Block headings in the left rail."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text in a 40rem measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Captions, hookup notes, cable labels."
+      },
+      "vfd-readout": {
+        "displayName": "VFD Readout",
+        "purpose": "The display's large word and source field only."
+      },
+      "vfd-legend": {
+        "displayName": "VFD Legend",
+        "purpose": "Display input and indicator legends; ordered-list numerals."
+      }
+    },
+    "shadows": [
+      {
+        "name": "display-seat",
+        "value": "inset 0 0 0 1px var(--glass-edge), inset 0 2px 10px rgb(0 0 0 / 0.8), 0 0 0 5px var(--bezel), 0 14px 30px -18px rgb(0 0 0 / 0.55)",
+        "purpose": "Seats the display glass in its bezel ring. Display only."
+      },
+      {
+        "name": "render-float",
+        "value": "drop-shadow(0 24px 28px rgb(0 0 0 / 0.18))",
+        "purpose": "Filter on the hero board render only."
+      },
+      {
+        "name": "phosphor-glow",
+        "value": "0 0 14px rgb(114 242 226 / 0.45)",
+        "purpose": "Text glow on lit display characters (8px/0.5 on legends)."
+      },
+      {
+        "name": "segment-glow",
+        "value": "0 0 8px rgb(114 242 226 / 0.7)",
+        "purpose": "The lit segment under the selected display input."
+      },
+      {
+        "name": "lamp-glow",
+        "value": "0 0 6px color-mix(in srgb, var(--accent) 60%, transparent)",
+        "purpose": "The lit compatibility lamp."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state",
+        "value": "0.2s ease-out",
+        "purpose": "Button brightness, project card border."
+      },
+      {
+        "name": "display-input",
+        "value": "color 0.15s ease-out",
+        "purpose": "Display input legends."
+      },
+      {
+        "name": "power-on",
+        "value": "STANDBY, POWER ON at 900ms, DOCK at 1800ms",
+        "purpose": "One-time display wake on load; skipped under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compat-list",
+        "value": "40rem"
+      },
+      {
+        "name": "hookup-row",
+        "value": "48rem"
+      },
+      {
+        "name": "block-rail",
+        "value": "56rem"
+      },
+      {
+        "name": "hero-split",
+        "value": "60rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The order action; the only filled button, deep teal.",
+      "html": "<a class=\"ds-button\" href=\"#\">Order for €30</a>",
+      "css": ".ds-button{display:inline-block;padding:0.75rem 1.25rem;border-radius:6px;background:var(--accent,#0a7064);color:var(--accent-ink,#fff);font-family:var(--sans,Geist,system-ui,sans-serif);font-weight:600;line-height:1.2;text-decoration:none;transition:filter .2s ease-out}.ds-button:hover{filter:brightness(1.12)}.ds-button:focus-visible{outline:2px solid var(--accent,#0a7064);outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "theme-toggle",
+      "description": "Wordmark, project links and the theme toggle on one row.",
+      "html": "<header class=\"ds-mast\"><a class=\"ds-mark\" href=\"#\">obcecado<span>.com</span></a><nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Phonkyo</a></nav><button class=\"ds-toggle\" type=\"button\" aria-label=\"Switch to dark theme\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z\"/></svg></button></header>",
+      "css": ".ds-mast{display:flex;align-items:center;gap:1.5rem;padding:1rem 1.5rem;font-family:var(--sans,Geist,system-ui,sans-serif);color:var(--ink,#0f1516)}.ds-mark{margin-right:auto;font-weight:700;letter-spacing:-0.02em;text-decoration:none;color:inherit}.ds-mark span{color:var(--muted,#4d5957);font-weight:500}.ds-nav{display:flex;gap:1.25rem}.ds-nav a{color:var(--muted,#4d5957);text-decoration:none}.ds-nav a[aria-current=page]{color:var(--ink,#0f1516)}.ds-nav a:hover{color:var(--accent,#0a7064)}.ds-toggle{display:grid;place-items:center;width:2.5rem;height:2.5rem;padding:0;border:0;border-radius:6px;background:none;color:var(--muted,#4d5957);cursor:pointer}.ds-toggle:hover{color:var(--ink,#0f1516);background:var(--sheet,#f8faf9)}.ds-toggle:focus-visible{outline:2px solid var(--accent,#0a7064);outline-offset:3px}.ds-toggle svg{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}"
+    },
+    {
+      "name": "VFD Display",
+      "kind": "custom",
+      "refersTo": "vfd-display",
+      "description": "The one lit object: dark glass, phosphor readout, ghost dots, input legends as a tablist.",
+      "html": "<div class=\"ds-vfd\"><p class=\"ds-vfd-flags\"><span class=\"lit\">ON</span><span class=\"lit\">RI</span><span class=\"lit\">STEREO</span><span>MUTE</span><span>SLEEP</span></p><p class=\"ds-vfd-readout\">DOCK</p><p class=\"ds-vfd-source\">RI LINK</p><div class=\"ds-vfd-inputs\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\">Dock</button><button role=\"tab\" aria-selected=\"false\">Spotify</button><button role=\"tab\" aria-selected=\"false\">AirPlay</button></div></div>",
+      "css": ".ds-vfd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1.5rem;align-items:end;padding:1.4rem 2.25rem 1.25rem;border-radius:10px;background:linear-gradient(180deg,rgb(255 255 255/.05),transparent 45%),var(--glass,#060808);box-shadow:inset 0 0 0 1px var(--glass-edge,#1c2527),inset 0 2px 10px rgb(0 0 0/.8),0 0 0 5px var(--bezel,#c9d1cf),0 14px 30px -18px rgb(0 0 0/.55);color:var(--vfd,#72f2e2);font-family:var(--dots,DotGothic16,ui-monospace,monospace)}.ds-vfd p{margin:0}.ds-vfd-flags{grid-column:1/-1;display:flex;gap:.25rem 1.25rem;color:var(--vfd-off,#1d3634);font-size:.75rem;letter-spacing:.12em}.ds-vfd-flags .lit{color:var(--vfd,#72f2e2);text-shadow:0 0 8px rgb(114 242 226/.5)}.ds-vfd-readout,.ds-vfd-source{background:radial-gradient(circle,var(--vfd-ghost,#0f1e1d) .9px,transparent 1.3px) 0 0/5px 5px;white-space:nowrap;text-shadow:0 0 14px rgb(114 242 226/.45)}.ds-vfd-readout{font-size:4.5rem;letter-spacing:.08em;line-height:1.15}.ds-vfd-source{font-size:1.75rem;letter-spacing:.1em;text-align:right}.ds-vfd-inputs{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:.25rem;padding-top:.75rem;border-top:1px solid var(--glass-edge,#1c2527)}.ds-vfd-inputs button{position:relative;padding:.5rem .25rem .65rem;border:0;border-radius:4px;background:none;color:var(--vfd-dim,#4a8f87);font:inherit;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:color .15s ease-out}.ds-vfd-inputs button::after{content:\"\";position:absolute;left:30%;right:30%;bottom:.2rem;height:3px;border-radius:1px;background:currentColor;opacity:.35}.ds-vfd-inputs button:hover{color:#6cc6bb}.ds-vfd-inputs button[aria-selected=true]{color:var(--vfd,#72f2e2);text-shadow:0 0 8px rgb(114 242 226/.5)}.ds-vfd-inputs button[aria-selected=true]::after{opacity:1;box-shadow:0 0 8px rgb(114 242 226/.7)}.ds-vfd-inputs button:focus-visible{outline:2px solid var(--vfd,#72f2e2);outline-offset:-2px}"
+    },
+    {
+      "name": "Hookup Chain",
+      "kind": "custom",
+      "refersTo": "hookup-node",
+      "description": "Boxes joined by cable lines; the board node is a piece of the display.",
+      "html": "<ol class=\"ds-hook\"><li class=\"ds-node\"><b>Your phone</b><span>Spotify, AirPlay</span></li><li class=\"ds-link wireless\">Wi-Fi</li><li class=\"ds-node board\"><b>Raspberry Pi + Phonkyo</b><span>Plays the music</span></li><li class=\"ds-link pair\">Audio / RI</li><li class=\"ds-node\"><b>Receiver</b><span>DOCK input and RI jack</span></li></ol>",
+      "css": ".ds-hook{display:grid;justify-items:start;margin:0;padding:0;list-style:none;font-family:var(--sans,Geist,system-ui,sans-serif);color:var(--ink,#0f1516)}.ds-node{display:grid;gap:.1rem;padding:.7rem .95rem;border:1px solid var(--line,#d3dad8);border-radius:8px;background:var(--sheet,#f8faf9);line-height:1.3}.ds-node b{font-weight:600}.ds-node span{color:var(--muted,#4d5957);font-size:.875rem}.ds-node.board{border-color:var(--glass-edge,#1c2527);background:var(--glass,#060808);color:var(--vfd,#72f2e2)}.ds-node.board span{color:#7fb3ac}.ds-link{margin-left:1.5rem;padding:.7rem 0 .7rem 1rem;border-left:2px solid var(--ink,#0f1516);color:var(--muted,#4d5957);font-size:.875rem}.ds-link.wireless{border-left-style:dashed}.ds-link.pair{border-left:6px double var(--ink,#0f1516)}"
+    },
+    {
+      "name": "Kit Card",
+      "kind": "card",
+      "refersTo": "kit-card",
+      "description": "Available kit drawn solid; unavailable kit dashed and unfilled.",
+      "html": "<div class=\"ds-kits\"><section class=\"ds-kit\"><h3>Basic kit</h3><p class=\"price\">€30 + shipping</p><ul><li>Assembled board</li></ul></section><section class=\"ds-kit off\"><h3>Complete kit</h3><p class=\"price\">Not available yet</p><ul><li>Adds cables</li></ul></section></div>",
+      "css": ".ds-kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;align-items:start;font-family:var(--sans,Geist,system-ui,sans-serif);color:var(--ink,#0f1516)}.ds-kit{padding:1.25rem 1.25rem .5rem;border:1px solid var(--ink,#0f1516);border-radius:8px;background:var(--sheet,#f8faf9)}.ds-kit h3{margin:0 0 .25rem;font-size:1.0625rem;font-weight:600}.ds-kit .price{margin:0 0 .75rem;font-weight:600;font-variant-numeric:tabular-nums}.ds-kit ul{padding-left:1.25rem}.ds-kit li::marker{color:var(--muted,#4d5957)}.ds-kit.off{border:1px dashed var(--muted,#4d5957);background:none;color:var(--muted,#4d5957)}"
+    },
+    {
+      "name": "Compatibility Lamp",
+      "kind": "chip",
+      "refersTo": "",
+      "description": "Lit lamp for yes, unlit ring for no; replaces status badges.",
+      "html": "<span class=\"ds-lamp lit\">Yes</span> <span class=\"ds-lamp\">No</span>",
+      "css": ".ds-lamp{display:inline-flex;align-items:center;gap:.45rem;margin-right:1rem;color:var(--muted,#4d5957);font-family:var(--sans,Geist,system-ui,sans-serif);font-size:.9375rem}.ds-lamp::before{content:\"\";width:.55rem;height:.55rem;border:1.5px solid currentColor;border-radius:50%;opacity:.6}.ds-lamp.lit{color:var(--ink,#0f1516)}.ds-lamp.lit::before{border-color:var(--accent,#0a7064);background:var(--accent,#0a7064);box-shadow:0 0 6px color-mix(in srgb,var(--accent,#0a7064) 60%,transparent);opacity:1}"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "project-card",
+      "description": "Home page project link: render and name, border turns teal on hover.",
+      "html": "<a class=\"ds-project\" href=\"#\"><span class=\"name\">Phonkyo</span><span class=\"sum\">A Raspberry Pi HAT your receiver mistakes for an Onkyo dock.</span></a>",
+      "css": ".ds-project{display:grid;gap:.5rem;padding:2rem;border:1px solid var(--line,#d3dad8);border-radius:10px;background:var(--sheet,#f8faf9);color:var(--ink,#0f1516);font-family:var(--sans,Geist,system-ui,sans-serif);text-decoration:none;transition:border-color .2s ease-out}.ds-project:hover{border-color:var(--accent,#0a7064)}.ds-project:focus-visible{outline:2px solid var(--accent,#0a7064);outline-offset:3px}.ds-project .name{font-size:3.25rem;font-weight:600;letter-spacing:-0.04em;line-height:1}.ds-project .sum{max-width:32ch;color:var(--muted,#4d5957);line-height:1.45}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lit Display on a Quiet Sheet",
+    "overview": "The site is a pale, cool, almost silent sheet with one object on it that glows: a receiver's front-panel VFD, black glass with a teal dot-matrix readout. Everything outside the display is typographic and flat: Geist on a cool grey ground, hairline rules between sections, one deep teal accent. The display is the only thing that emits light, and it is the same dark glass in both themes, so it reads as a physical object laid on the page rather than a themed panel.\n\nStatus is expressed the way the hardware expresses it, as lit or unlit indicators: a legend where a few words glow and the rest sit drawn but dark, an underline segment that lights under the selected input, a lamp that is either filled and glowing or an empty ring. Density is calm and reading-led: a single measured text column, section headings hung in a left rail on wide screens, generous vertical gaps.\n\nThe world replaced a brushed-metal hi-fi faceplate. The sheet carries no material texture; the only texture in the system is the display's own dot grid and glass sheen, which belong to the object.",
+    "keyCharacteristics": [
+      "Light theme by default; dark follows `prefers-color-scheme` unless `data-theme` on `<html>` overrides it (header toggle, persisted in localStorage).",
+      "One lit object: the VFD display, dark glass in both themes.",
+      "DotGothic16 appears only on display content; everything else is Geist.",
+      "Status as lit versus unlit, never as coloured badges.",
+      "Flat sheet, hairline rules, a single deep teal accent."
+    ],
+    "rules": [
+      {
+        "name": "The One Lit Object Rule",
+        "body": "Only the display (and the board node that stands for it) emits light. Glow (`text-shadow`/`box-shadow` in phosphor) never appears on sheet elements; the single exception is the lit compatibility lamp, which glows in deep teal because it is itself an indicator.",
+        "section": "colors"
+      },
+      {
+        "name": "The Same Glass Rule",
+        "body": "The display keeps its dark glass and phosphor palette in both themes. Only its glass, edge and bezel shade shift slightly to seat it on the dark sheet; the phosphor values never change.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lit Not Coloured Rule",
+        "body": "Status is lit or unlit: filled glowing lamp versus empty ring, bright legend versus drawn-dark legend. No red/green badges, pills or status colours.",
+        "section": "colors"
+      },
+      {
+        "name": "The Display Face Rule",
+        "body": "DotGothic16 is reserved for display content: the readout and source field, the input legends, the indicator legend, and ordered-list numerals (which are counted steps, read like a display). Never for headings, buttons, body or navigation.",
+        "section": "typography"
+      },
+      {
+        "name": "The Weight Ceiling Rule",
+        "body": "Geist runs at 400 for reading, 500 for quiet labels, 600 for emphasis and headings, 700 only on the wordmark.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Cards, nodes, buttons and navigation never carry shadows. If something needs separation, use the sheet tone or a hairline.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the display dark glass with phosphor text in both themes, seated in its bezel ring.",
+      "Do express status as lit versus unlit (glowing fill or legend versus empty ring or dark legend).",
+      "Do keep DotGothic16 on display content only: readout, source field, input and indicator legends, ordered-list numerals.",
+      "Do separate sections with 1px hairline rules and hang section headings in a 14rem left rail from 56rem up.",
+      "Do use deep teal as the only accent on the sheet, and white or near-black teal ink on it depending on theme.",
+      "Do draw connections as lines: solid for a wire, dashed for wireless, double for a pair.",
+      "Do honour reduced motion: transitions off, the display shows its end state."
+    ],
+    "donts": [
+      "Don't put brushed metal, grain or faceplate texture on the sheet; the only textures are the display's own dot grid and glass sheen.",
+      "Don't give cards, nodes or buttons shadows; only the display and product renders are objects with depth.",
+      "Don't use phosphor colour or glow outside the display and the board node.",
+      "Don't use coloured status badges or pills; use lamps.",
+      "Don't set headings, buttons, navigation or body copy in DotGothic16."
+    ]
+  }
+}
