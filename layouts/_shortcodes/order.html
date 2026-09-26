@@ -1,0 +1,15 @@
+{{- $email := site.Params.orderEmail }}
+{{- $subject := printf "%s order" .Page.Title }}
+{{- $body := "Kit: Basic\nQuantity: 1\nShipping country: \nAmplifier model: \n" }}
+<div class="order">
+  <p>
+    Orders are handled by email. Say which kit you want, how many, and which
+    country it ships to. I'll reply with the total including shipping and how
+    to pay.
+  </p>
+  <p>
+    {{- $href := printf "mailto:%s?subject=%s&body=%s" $email (replace ($subject | urlquery) "+" "%20") (replace ($body | urlquery) "+" "%20") }}
+    <a class="button" href="{{ $href | safeURL }}">Email an order</a>
+    <span class="order-address">{{ $email }}</span>
+  </p>
+</div>

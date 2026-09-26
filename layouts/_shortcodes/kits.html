@@ -1,0 +1,13 @@
+<div class="kits">
+  {{- range .Page.Params.kits }}
+  <section class="kit{{ if not .available }} is-unavailable{{ end }}">
+    <h3>{{ .name }}</h3>
+    <p class="kit-price">{{ .price }}</p>
+    <ul>
+      {{- range .contents }}
+      <li>{{ . }}</li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+</div>

@@ -1,0 +1,8 @@
+{{- with .Page.Resources.GetMatch "board-top.png" }}
+{{- $img := .Resize "1100x webp q85" }}
+<figure class="board-figure">
+  <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy"
+       alt="Top view of the Phonkyo board. The 40-pin header runs along the top edge; below it, from left to right, the Remote jack, the Audio jack and the DAC chip.">
+  <figcaption>The top of the {{ $.Page.Params.version }} board, rendered from its KiCad design.</figcaption>
+</figure>
+{{- end }}
