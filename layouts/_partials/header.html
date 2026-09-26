@@ -1,0 +1,8 @@
+<header class="masthead">
+  <a class="wordmark" href="{{ "/" | relURL }}">obcecado<span>.com</span></a>
+  <nav aria-label="Projects">
+    {{- range where site.RegularPages "Params.layout" "product" }}
+    <a href="{{ .RelPermalink }}"{{ if eq . $.Page }} aria-current="page"{{ end }}>{{ .Title }}</a>
+    {{- end }}
+  </nav>
+</header>

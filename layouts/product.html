@@ -1,0 +1,76 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <h1 class="display">{{ .Title }}</h1>
+      <p class="lede">{{ .Params.summary }}</p>
+      <p class="cta">
+        <a class="button" href="#ordering">Order one for {{ .Params.price }}</a>
+        <span class="cta-note">Plus shipping. Ships within the EU.</span>
+      </p>
+    </div>
+    <figure class="hero-board">
+      {{- with .Resources.GetMatch "board-iso.png" }}
+      {{- $sm := .Resize "760x webp q82" }}
+      {{- $lg := .Resize "1400x webp q82" }}
+      <img src="{{ $lg.RelPermalink }}" srcset="{{ $sm.RelPermalink }} 760w, {{ $lg.RelPermalink }} 1400w"
+           sizes="(min-width: 60rem) 55vw, 100vw" width="{{ $lg.Width }}" height="{{ $lg.Height }}"
+           alt="Rendering of the Phonkyo {{ $.Params.version }} board: a green pHAT with a 40-pin header, a DAC chip and two 3.5 mm jack footprints labelled Remote and Audio.">
+      {{- end }}
+      <figcaption><span class="tag">{{ .Params.version }}</span></figcaption>
+    </figure>
+  </div>
+
+  {{- with .Params.dial }}
+  <div class="dial" data-dial style="--stops: {{ len . }}">
+    <div class="dial-window">
+      <div class="dial-scale" aria-hidden="true"></div>
+      <div class="dial-stops" role="tablist" aria-label="What Phonkyo does">
+        {{- range $i, $s := . }}
+        <button type="button" role="tab" id="dial-{{ $i }}" aria-controls="dial-readout"
+                aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"
+                data-text="{{ $s.text }}">{{ $s.label }}</button>
+        {{- end }}
+      </div>
+      <div class="dial-needle" aria-hidden="true"></div>
+    </div>
+    <p class="dial-readout" id="dial-readout" role="tabpanel" aria-live="polite">{{ (index . 0).text }}</p>
+  </div>
+  {{- end }}
+</section>
+
+<article class="product prose">
+  {{ .Content }}
+</article>
+
+<script>
+(() => {
+  const dial = document.querySelector("[data-dial]");
+  if (!dial) return;
+  const tabs = [...dial.querySelectorAll("[role=tab]")];
+  const readout = dial.querySelector(".dial-readout");
+  const select = (tab, focus) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute("aria-selected", on);
+      t.tabIndex = on ? 0 : -1;
+    });
+    dial.style.setProperty("--at", tabs.indexOf(tab));
+    readout.textContent = tab.dataset.text;
+    readout.setAttribute("aria-labelledby", tab.id);
+    if (focus) tab.focus();
+  };
+  tabs.forEach((t) => {
+    t.addEventListener("click", () => select(t));
+    t.addEventListener("keydown", (e) => {
+      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (!d) return;
+      e.preventDefault();
+      select(tabs[(tabs.indexOf(t) + d + tabs.length) % tabs.length], true);
+    });
+  });
+  select(tabs[0]);
+  dial.classList.add("is-live");
+})();
+</script>
+{{ end }}

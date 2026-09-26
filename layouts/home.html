@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="intro">
+  <h1 class="display">obcecado</h1>
+  <div class="prose">{{ .Content }}</div>
+</section>
+
+<ul class="projects">
+  {{- range where site.RegularPages "Params.layout" "product" }}
+  <li>
+    <a class="project" href="{{ .RelPermalink }}">
+      {{- with .Resources.GetMatch "board-iso.png" }}
+      {{- $img := .Resize "800x webp q82" }}
+      <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="">
+      {{- end }}
+      <span class="project-text">
+        <span class="project-name">{{ .Title }}</span>
+        <span class="project-summary">{{ .Params.summary }}</span>
+      </span>
+    </a>
+  </li>
+  {{- end }}
+</ul>
+{{ end }}
