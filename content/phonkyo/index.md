@@ -10,7 +10,7 @@ description: >-
   remote port. Use your Pi as a Spotify Connect, AirPlay or Plexamp player
   that turns your amplifier on by itself.
 version: v0.3
-price: €25
+price: €30
 # The tuner dial in the hero. One stop per thing the board does.
 dial:
   - label: Remote
@@ -23,7 +23,7 @@ dial:
     text: Plays your Plex music library as a headless player.
 kits:
   - name: Basic kit
-    price: €25 + shipping
+    price: €30 + shipping
     available: true
     contents:
       - Assembled Phonkyo board
