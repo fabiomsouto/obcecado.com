@@ -29,10 +29,16 @@ With KiCad 10 from Flathub, from the `phonkyo` repository:
 
 ```sh
 kicad-cli pcb render -o board-iso.png -w 2000 -h 1400 --quality basic \
-  --perspective --rotate '-45,0,-30' phonkyo.kicad_pcb
+  --use-board-stackup-colors --perspective --rotate '-45,0,-30' phonkyo.kicad_pcb
 kicad-cli pcb render -o board-top.png -w 2000 -h 1000 --quality basic \
-  --side top --zoom 1.15 phonkyo.kicad_pcb
+  --use-board-stackup-colors --side top --zoom 1.15 phonkyo.kicad_pcb
 magick board-iso.png -trim +repage board-iso.png   # same for board-top.png
 ```
 
 (`flatpak run --command=kicad-cli org.kicad.KiCad` stands in for `kicad-cli`.)
+
+## Licence
+
+The site's words and images (`content/`) are CC BY-NC-SA 4.0, the same as the
+Phonkyo design. The code is MIT. The fonts are under the SIL Open Font License.
+See [`LICENSE`](LICENSE).

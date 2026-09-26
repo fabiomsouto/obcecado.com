@@ -14,11 +14,15 @@
 <meta property="og:image" content="{{ .Permalink }}">
 {{- end }}
 {{- end }}
-<meta name="theme-color" content="#c9cac5">
+<meta name="theme-color" content="#eef1f0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0d0e" media="(prefers-color-scheme: dark)">
+<script>
+  // Apply the remembered theme before first paint; without one, CSS follows the system.
+  try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<link rel="preload" href="{{ "fonts/saira-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "fonts/dotgothic16-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
 {{- with resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
 {{- end }}

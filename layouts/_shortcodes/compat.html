@@ -1,0 +1,30 @@
+{{- $features := slice "Turn on" "Turn off" "Dock input" "TV input" "Volume" }}
+{{- $notes := .Page.Params.compat_notes | default dict }}
+<div class="compat">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Model</th>
+        {{- range $features }}
+        <th scope="col">{{ . }}{{ if index $notes . }}<a class="note-ref" href="#compat-note-{{ anchorize . }}" aria-label="See the note on {{ . }}">*</a>{{ end }}</th>
+        {{- end }}
+      </tr>
+    </thead>
+    <tbody>
+      {{- range .Page.Params.receivers }}
+      <tr>
+        <th scope="row">{{ .model }}</th>
+        {{- range $i, $w := .works }}
+        {{- $f := index $features $i }}
+        <td data-label="{{ $f }}{{ if index $notes $f }} *{{ end }}"><span class="lamp{{ if $w }} is-lit{{ end }}">{{ if $w }}Yes{{ else }}No{{ end }}</span></td>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>
+{{- range $f := $features }}
+{{- with index $notes $f }}
+<p class="compat-note" id="compat-note-{{ anchorize $f }}"><span aria-hidden="true">*</span> {{ . }}</p>
+{{- end }}
+{{- end }}

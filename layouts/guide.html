@@ -1,0 +1,68 @@
+{{ define "main" }}
+<article class="guide">
+  <header class="guide-head">
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.summary }}
+    <p class="lede">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  <div class="guide-body">
+    <nav class="guide-toc" aria-label="Steps">
+      {{ .TableOfContents }}
+    </nav>
+    <div class="guide-text">
+      {{ .Content }}
+    </div>
+  </div>
+  <p class="visually-hidden" role="status" data-copy-status></p>
+</article>
+
+<script>
+(() => {
+  // A Copy button on every code block. Without JavaScript the blocks stay plain.
+  const status = document.querySelector("[data-copy-status]");
+  const copy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (e) {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.append(area);
+      area.select();
+      const ok = document.execCommand("copy");
+      area.remove();
+      return ok;
+    }
+  };
+  document.querySelectorAll(".guide-text pre").forEach((pre) => {
+    const wrap = document.createElement("div");
+    wrap.className = "codeblock";
+    pre.before(wrap);
+    wrap.append(pre);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copy";
+    button.textContent = "Copy";
+    wrap.append(button);
+    let timer;
+    button.addEventListener("click", async () => {
+      const ok = await copy(pre.innerText.replace(/\n$/, ""));
+      button.textContent = ok ? "Copied" : "Couldn't copy";
+      button.classList.toggle("is-done", ok);
+      status.textContent = ok ? "Copied to the clipboard" : "Couldn't copy; select the text and copy it by hand";
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        button.textContent = "Copy";
+        button.classList.remove("is-done");
+        status.textContent = "";
+      }, 2000);
+    });
+  });
+})();
+</script>
+{{ end }}
