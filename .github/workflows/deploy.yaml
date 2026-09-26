@@ -35,7 +35,8 @@ jobs:
         run: hugo --gc --minify
 
       # Everything below only runs for main, and only once the repository
-      # variables from aws/README.md are set.
+      # variables (AWS_ROLE_ARN and the rest) are set. The AWS setup is in the
+      # private obcecado-infra repository.
       - name: Configure AWS credentials
         if: github.ref == 'refs/heads/main' && vars.AWS_ROLE_ARN != ''
         uses: aws-actions/configure-aws-credentials@v6

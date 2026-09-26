@@ -2,8 +2,8 @@
 
 Source for [obcecado.com](https://obcecado.com), built with [Hugo](https://gohugo.io).
 `.github/workflows/deploy.yaml` builds it on every push and pull request, and on
-`main` deploys it to S3 behind CloudFront. The AWS side is described in
-[`aws/README.md`](aws/README.md).
+`main` deploys it to S3 behind CloudFront. The AWS setup lives in a separate,
+private repository.
 
 ## Local preview
 
