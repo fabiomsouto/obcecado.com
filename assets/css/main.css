@@ -170,9 +170,6 @@ a:hover {
   font-weight: 600;
 }
 
-.product p,
-.product ul,
-.product ol,
 /* Plain pages (privacy, 404): a single reading column. */
 .page h1 {
   margin: 0 0 1.25rem;
@@ -219,6 +216,9 @@ a:hover {
   font-size: 0.9375rem;
 }
 
+.product p,
+.product ul,
+.product ol,
 .page p {
   margin: 0 0 1rem;
 }
