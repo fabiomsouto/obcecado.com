@@ -5,7 +5,8 @@
   <p>
     Orders are handled by email. Say which kit you want, how many, and which
     country it ships to. I'll reply with the total including shipping and how
-    to pay.
+    to pay. What I do with your details is on the
+    <a href="{{ "privacy/" | relURL }}">privacy page</a>.
   </p>
   <p>
     {{- $href := printf "mailto:%s?subject=%s&body=%s" $email (replace ($subject | urlquery) "+" "%20") (replace ($body | urlquery) "+" "%20") }}

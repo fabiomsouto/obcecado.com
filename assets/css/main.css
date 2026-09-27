@@ -154,8 +154,7 @@ a:hover {
   line-height: 0.95;
 }
 
-.product h2,
-.page h1 {
+.product h2 {
   margin: 0 0 1rem;
   font-size: 1.375rem;
   font-stretch: 108%;
@@ -174,6 +173,52 @@ a:hover {
 .product p,
 .product ul,
 .product ol,
+/* Plain pages (privacy, 404): a single reading column. */
+.page h1 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.25rem, 7vw, 3.25rem);
+  font-stretch: 110%;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.page h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-size: 1.375rem;
+  font-stretch: 108%;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.page ul {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.page ul ul {
+  margin: 0.4rem 0 0;
+}
+
+.page li + li {
+  margin-top: 0.4rem;
+}
+
+.page li::marker {
+  color: var(--muted);
+}
+
+.page strong {
+  font-weight: 600;
+}
+
+.page .page-updated {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
 .page p {
   margin: 0 0 1rem;
 }
@@ -339,6 +384,11 @@ a:hover {
 
 .colophon p {
   margin: 0;
+}
+
+.colophon-links {
+  display: flex;
+  gap: 1.25rem;
 }
 
 /* Hero */
