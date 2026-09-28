@@ -1085,6 +1085,9 @@ a:hover {
 .note-ref {
   margin-left: 0.1rem;
   color: var(--accent);
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
   text-decoration: none;
 }
 

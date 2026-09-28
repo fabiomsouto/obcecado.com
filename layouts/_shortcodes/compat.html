@@ -1,12 +1,15 @@
-{{- $features := slice "Turn on" "Turn off" "Dock input" "TV input" "Volume" }}
+{{- $features := slice "Turn on" "Turn off" "Dock input" "TV input" "Volume" "Remote buttons" }}
 {{- $notes := .Page.Params.compat_notes | default dict }}
+{{- /* Number the footnotes in column order, so each marker points at one note. */}}
+{{- $num := dict }}
+{{- range $features }}{{ if index $notes . }}{{ $num = merge $num (dict . (add (len $num) 1)) }}{{ end }}{{ end }}
 <div class="compat">
   <table>
     <thead>
       <tr>
         <th scope="col">Model</th>
         {{- range $features }}
-        <th scope="col">{{ . }}{{ if index $notes . }}<a class="note-ref" href="#compat-note-{{ anchorize . }}" aria-label="See the note on {{ . }}">*</a>{{ end }}</th>
+        <th scope="col">{{ . }}{{ if index $notes . }}<a class="note-ref" href="#compat-note-{{ anchorize . }}" aria-label="See note {{ index $num . }}, on {{ . }}">{{ index $num . }}</a>{{ end }}</th>
         {{- end }}
       </tr>
     </thead>
@@ -16,7 +19,7 @@
         <th scope="row">{{ .model }}</th>
         {{- range $i, $w := .works }}
         {{- $f := index $features $i }}
-        <td data-label="{{ $f }}{{ if index $notes $f }} *{{ end }}"><span class="lamp{{ if $w }} is-lit{{ end }}">{{ if $w }}Yes{{ else }}No{{ end }}</span></td>
+        <td data-label="{{ $f }}{{ with index $num $f }} ({{ . }}){{ end }}"><span class="lamp{{ if $w }} is-lit{{ end }}">{{ if $w }}Yes{{ else }}No{{ end }}</span></td>
         {{- end }}
       </tr>
       {{- end }}
@@ -25,6 +28,6 @@
 </div>
 {{- range $f := $features }}
 {{- with index $notes $f }}
-<p class="compat-note" id="compat-note-{{ anchorize $f }}"><span aria-hidden="true">*</span> {{ . }}</p>
+<p class="compat-note" id="compat-note-{{ anchorize $f }}"><span aria-hidden="true">{{ index $num $f }}</span> {{ . }}</p>
 {{- end }}
 {{- end }}

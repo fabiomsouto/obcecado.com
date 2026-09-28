@@ -42,16 +42,21 @@ kits:
       - 3.5 mm to stereo RCA cable for audio
       - 3.5 mm to 3.5 mm cable for RI
       - 3D-printed case for a Raspberry Pi Zero 2 W with Phonkyo on top
-# Receivers tested so far. works: turn on, turn off, dock input, TV input, volume.
+# Receivers tested so far. works: turn on, turn off, dock input, TV input, volume,
+# remote buttons.
 receivers:
   - model: Onkyo TX-8020
-    works: [true, true, true, false, false]
+    works: [true, true, true, false, false, true]
 # Footnotes on the compatibility table, keyed by column name.
 compat_notes:
   Volume: >-
     Volume here means changing the receiver's volume over RI. Software volume on
     the Pi always works, but it can only go as loud as the volume set on the
     receiver.
+  Remote buttons: >-
+    The receiver's own remote controlling playback through Phonkyo: play/pause,
+    next and previous track, fast-forward, rewind and repeat. This works with
+    Plexamp only.
 ---
 
 ## How it works
@@ -73,11 +78,27 @@ Raspberry Pi looks like a dock.
 4. After five minutes of silence, it switches the receiver off again, but only
    if it was the one that switched it on.
 
+
 The switching is done by `phonkyo-monitor`, a small service that watches the
 sound card. There's no one-step installer yet: the
 [setup guide](/phonkyo/setup/) walks through installing it with the rest of the
 software. It's tested on a Raspberry Pi Zero 2 W running Raspberry Pi OS Lite
 (64-bit, Trixie).
+
+### Your receiver's remote
+
+With the receiver on DOCK, it passes the transport buttons of its own remote on
+to the dock. Phonkyo listens for them, so the remote that came with your
+receiver controls Plexamp:
+
+- **Play/pause**, **next** and **previous track**
+- **Fast-forward** and **rewind**, 10 seconds per press, and they keep going
+  while you hold the button
+- **Repeat**, cycling through off, repeat all and repeat one
+
+This only works with Plexamp. AirPlay doesn't let the receiving end control the
+phone that's sending, and the Spotify player on the Pi can't be controlled
+locally, so for those, use your phone. Shuffle and Menu don't do anything yet.
 
 ## On the board
 

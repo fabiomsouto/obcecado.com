@@ -142,7 +142,7 @@ cd nqptp && autoreconf -fi && ./configure --with-systemd-startup \
 git clone --depth 1 https://github.com/mikebrady/shairport-sync.git
 cd shairport-sync && autoreconf -fi && ./configure \
     --sysconfdir=/etc --with-alsa --with-soxr --with-avahi \
-    --with-ssl=openssl --with-systemd --with-airplay-2 \
+    --with-ssl=openssl --with-airplay-2 \
   && make -j2 && sudo make install && cd ..
 ```
 
@@ -206,6 +206,10 @@ DOCK. After five minutes of silence it switches the receiver off again, but
 only if it was the one that switched it on. If you turned the receiver on
 yourself for the TV or a record, it leaves it alone.
 
+It also listens for the buttons on the receiver's remote, which the receiver
+passes to the dock while it's on DOCK. When Plexamp is playing, play/pause,
+next, previous, fast-forward, rewind and repeat control it.
+
 Install it from the phonkyo repository, as its own system user:
 
 ```sh
@@ -223,6 +227,9 @@ To see it work, follow its log and play something:
 ```sh
 journalctl -u phonkyo-monitor -f
 ```
+
+Then, with Plexamp playing, press play/pause on the receiver's remote. The log
+should show `remote: play_pause -> Plexamp`, and the music should pause.
 
 ## Check everything
 
