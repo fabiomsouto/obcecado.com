@@ -11,9 +11,10 @@ description: >-
   receiver on and off.
 ---
 
-Write the card, connect the board, and run one command: the installer does
-the rest. If you'd rather see every step, or change one, the
-[manual install](#install-by-hand) does the same thing by hand. The steps follow the install notes in the
+Write the card and connect the board. Then install the software in one of two
+ways: [one command](#install-everything-in-one-step) that does everything, or
+[by hand](#install-by-hand), step by step. They do the same thing, so pick one:
+installing by hand is an alternative to the command, not a follow-up. The steps follow the install notes in the
 [phonkyo repository](https://github.com/fabiomsouto/phonkyo/blob/main/install/MANIFEST.md),
 which also explain the reasons behind each one.
 
@@ -81,14 +82,15 @@ something to it. Running the installer again is safe, and it's also how you
 update. If something goes wrong, it says which step failed, and the full log is
 in `~/phonkyo-setup.log`.
 
-That's it. If you'd rather do it yourself, the [manual install](#install-by-hand)
-below does the same, step by step.
+That's it: you're done. The next section is the alternative to this one, so skip
+it.
 
-## Install by hand
+## Or, install by hand {#install-by-hand}
 
-For advanced users who want to see or change each step. It does exactly what
-the installer does. You can also mix the two: run the installer, then adjust
-things by hand.
+**An alternative to the one command above.** If you ran the installer, skip
+this section. It's for advanced users who want to see or change each step, and
+it does exactly what the installer does. You can also run the installer and
+then adjust a step by hand.
 
 ### Turn on the sound card
 

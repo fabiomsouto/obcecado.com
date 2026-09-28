@@ -131,21 +131,26 @@ let me know what works and I'll add it here.
 
 ## Setup
 
-Phonkyo needs Raspberry Pi OS Lite (64-bit) on the Pi, plus the software for
-the sound card, the players you want and the receiver control. Once the card
-is written and you can log in to the Pi, one command installs all of it:
+Write Raspberry Pi OS Lite (64-bit) to a microSD card with
+[Raspberry Pi Imager](https://www.raspberrypi.com/software/), turning on SSH and
+your Wi-Fi in its settings. Connect the board, power the Pi on and log in to it.
+Then there are two ways to install the software. Pick one.
+
+**One command.** It installs the sound card, the players you choose and the
+receiver control, and reboots when it's done:
 
 ```sh
 curl -fsSL https://obcecado.com/phonkyo/install.sh | bash
 ```
 
-The guide covers the rest, from a blank microSD card to a receiver that
-switches itself on.
+**Or, by hand.** If you'd rather see or change every step, the setup guide
+does the same thing one command at a time. It's an alternative to the command
+above, not a next step: if you ran the command, you're done.
 
-<p><a class="button button-quiet" href="/phonkyo/setup/">Open the setup guide</a></p>
+<p><a class="button button-quiet" href="/phonkyo/setup/#install-by-hand">Install by hand</a></p>
 
-Advanced users can [install everything by hand](/phonkyo/setup/#install-by-hand)
-instead, one step at a time.
+The [setup guide](/phonkyo/setup/) also covers writing the card and connecting
+the board in more detail.
 
 ## Design files
 
