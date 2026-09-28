@@ -13,7 +13,7 @@ markup:
     codeFences: false
   tableOfContents:
     startLevel: 2
-    endLevel: 2
+    endLevel: 3
     ordered: false
 
 params:

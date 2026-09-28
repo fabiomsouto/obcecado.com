@@ -78,11 +78,9 @@ Raspberry Pi looks like a dock.
 4. After five minutes of silence, it switches the receiver off again, but only
    if it was the one that switched it on.
 
-
 The switching is done by `phonkyo-monitor`, a small service that watches the
-sound card. There's no one-step installer yet: the
-[setup guide](/phonkyo/setup/) walks through installing it with the rest of the
-software. It's tested on a Raspberry Pi Zero 2 W running Raspberry Pi OS Lite
+sound card. One command installs it along with the rest of the software; the
+[setup guide](/phonkyo/setup/) has the details. It's tested on a Raspberry Pi Zero 2 W running Raspberry Pi OS Lite
 (64-bit, Trixie).
 
 ### Your receiver's remote
@@ -134,12 +132,20 @@ let me know what works and I'll add it here.
 ## Setup
 
 Phonkyo needs Raspberry Pi OS Lite (64-bit) on the Pi, plus the software for
-the sound card, the players you want and the receiver control. There's no
-one-step installer yet, so it's done by hand, one command at a time. The guide
-covers every step, from a blank microSD card to a receiver that switches itself
-on.
+the sound card, the players you want and the receiver control. Once the card
+is written and you can log in to the Pi, one command installs all of it:
+
+```sh
+curl -fsSL https://obcecado.com/phonkyo/install.sh | bash
+```
+
+The guide covers the rest, from a blank microSD card to a receiver that
+switches itself on.
 
 <p><a class="button button-quiet" href="/phonkyo/setup/">Open the setup guide</a></p>
+
+Advanced users can [install everything by hand](/phonkyo/setup/#install-by-hand)
+instead, one step at a time.
 
 ## Design files
 

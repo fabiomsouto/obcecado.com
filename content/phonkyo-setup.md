@@ -11,8 +11,9 @@ description: >-
   receiver on and off.
 ---
 
-There's no one-step installer yet, so this takes a while. Most of it is typing
-commands into a terminal on the Pi. The steps follow the install notes in the
+Write the card, connect the board, and run one command: the installer does
+the rest. If you'd rather see every step, or change one, the
+[manual install](#install-by-hand) does the same thing by hand. The steps follow the install notes in the
 [phonkyo repository](https://github.com/fabiomsouto/phonkyo/blob/main/install/MANIFEST.md),
 which also explain the reasons behind each one.
 
@@ -59,7 +60,37 @@ your computer, with the username you chose:
 ssh you@phonkyo.local
 ```
 
-## Turn on the sound card
+## Install everything in one step
+
+On the Pi, run:
+
+```sh
+curl -fsSL https://obcecado.com/phonkyo/install.sh | bash
+```
+
+It asks which players you want (Spotify, AirPlay and Plexamp, any mix) and the
+name the Pi shows up as on your phone, then installs everything, including the
+receiver control. It takes about 10-15 minutes, most of it compiling AirPlay 2.
+
+For Plexamp, it asks for a sign-in code partway through. Open
+[plex.tv/claim](https://plex.tv/claim) while signed in to Plex, and paste the
+code as soon as you have it: it expires after 4 minutes and works only once.
+
+At the end it reboots to switch on the sound card. When the Pi is back, play
+something to it. Running the installer again is safe, and it's also how you
+update. If something goes wrong, it says which step failed, and the full log is
+in `~/phonkyo-setup.log`.
+
+That's it. If you'd rather do it yourself, the [manual install](#install-by-hand)
+below does the same, step by step.
+
+## Install by hand
+
+For advanced users who want to see or change each step. It does exactly what
+the installer does. You can also mix the two: run the installer, then adjust
+things by hand.
+
+### Turn on the sound card
 
 Open the boot configuration:
 
@@ -92,7 +123,7 @@ again:
 dtoverlay=hifiberry-dac
 ```
 
-## Install the basics
+### Install the basics
 
 ```sh
 sudo apt-get update
@@ -103,7 +134,7 @@ sudo apt-get install -y git python3-lgpio gpiod python3-gpiozero avahi-utils
 but it gives you `avahi-browse` for checking that AirPlay and Spotify are
 visible on the network.
 
-## Spotify Connect
+### Spotify Connect
 
 Spotify Connect comes from raspotify, which has its own package source:
 
@@ -115,13 +146,15 @@ echo "deb [signed-by=/usr/share/keyrings/raspotify_key.asc] https://dtcooper.git
 sudo apt-get update && sudo apt-get install -y raspotify
 ```
 
-It starts by itself and needs no configuration. Open Spotify on your phone and
-the Pi appears as a speaker.
+It starts by itself. Open Spotify on your phone and the Pi appears as a
+speaker, called "raspotify" followed by the Pi's name. To call it something
+else, add a line like `LIBRESPOT_NAME="phonkyo"` to `/etc/raspotify/conf` and
+run `sudo systemctl restart raspotify`.
 
-## AirPlay 2
+### AirPlay 2
 
 Raspberry Pi OS only packages the older AirPlay, so AirPlay 2 is built from
-source. That takes a while on a Zero 2 W. First the build tools:
+source. It takes a few minutes on a Zero 2 W. First the build tools:
 
 ```sh
 sudo apt-get install -y build-essential autoconf automake libtool \
@@ -129,7 +162,7 @@ sudo apt-get install -y build-essential autoconf automake libtool \
   avahi-daemon libavahi-client-dev libssl-dev libsoxr-dev \
   libplist-dev libplist-utils libsodium-dev \
   libavutil-dev libavcodec-dev libavformat-dev \
-  uuid-dev libgcrypt-dev xxd
+  uuid-dev libgcrypt-dev xxd libglib2.0-dev systemd-dev git
 ```
 
 Then nqptp, the timing helper AirPlay 2 needs, and shairport-sync itself:
@@ -143,11 +176,18 @@ git clone --depth 1 https://github.com/mikebrady/shairport-sync.git
 cd shairport-sync && autoreconf -fi && ./configure \
     --sysconfdir=/etc --with-alsa --with-soxr --with-avahi \
     --with-ssl=openssl --with-airplay-2 \
+    --with-dbus-interface --with-mpris-interface --with-systemd-startup \
   && make -j2 && sudo make install && cd ..
 ```
 
 Keep `-j2`: the Zero 2 W has 512 MB of memory, and more parallel jobs can run it
-out.
+out. Don't leave out `--with-systemd-startup`: without it, shairport-sync
+installs no service to start, and the `enable` step below fails.
+
+These clone the latest code. The installer builds the versions it was tested
+with instead: nqptp `c925f27` and shairport-sync `01078ad`. To do the same,
+run `git fetch --depth 1 origin <commit> && git checkout FETCH_HEAD` in each
+folder before building.
 
 Open `/etc/shairport-sync.conf` and set these two lines, removing the `//` in
 front of them. This names the speaker and points it at Phonkyo's sound card by
@@ -164,12 +204,12 @@ Then start both services and have them start at boot:
 sudo systemctl enable --now nqptp shairport-sync
 ```
 
-## Plexamp
+### Plexamp
 
 Plexamp runs on Node.js, which Raspberry Pi OS packages:
 
 ```sh
-sudo apt-get install -y nodejs
+sudo apt-get install -y nodejs bzip2
 curl -sSL -o /tmp/plexamp.tar.bz2 \
   https://plexamp.plex.tv/headless/Plexamp-Linux-headless-v4.13.2.tar.bz2
 sudo tar -xjf /tmp/plexamp.tar.bz2 -C /opt
@@ -198,7 +238,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now plexamp
 ```
 
-## Receiver control
+### Receiver control
 
 This is the part that makes the Pi act like a dock. `phonkyo-monitor` watches
 the sound card. When music starts, it switches the receiver on and over to
@@ -210,10 +250,11 @@ It also listens for the buttons on the receiver's remote, which the receiver
 passes to the dock while it's on DOCK. When Plexamp is playing, play/pause,
 next, previous, fast-forward, rewind and repeat control it.
 
-Install it from the phonkyo repository, as its own system user:
+Install it from the phonkyo repository, as its own system user. `sw-v1.0.0` is
+the release the installer uses:
 
 ```sh
-git clone --depth 1 https://github.com/fabiomsouto/phonkyo.git
+git clone --depth 1 --branch sw-v1.0.0 https://github.com/fabiomsouto/phonkyo.git
 sudo useradd --system --no-create-home --user-group --groups gpio,audio phonkyo
 sudo mkdir -p /opt/phonkyo
 sudo cp -r phonkyo/software/phonkyo /opt/phonkyo/

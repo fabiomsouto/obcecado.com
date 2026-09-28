@@ -678,6 +678,22 @@ a:hover {
   color: var(--accent);
 }
 
+/* The manual install's steps nest under their section, indented, and stay
+   in the same column as it. */
+.guide-toc li {
+  break-inside: avoid;
+}
+
+.guide-toc ul ul {
+  columns: auto;
+  padding-left: 0.85rem;
+}
+
+.guide-toc ul ul a {
+  padding: 0.15rem 0;
+  font-size: 0.875rem;
+}
+
 /* On phones the step list is a compact index above the text. */
 .guide-toc {
   padding: 1.25rem 0;
@@ -751,7 +767,8 @@ a:hover {
   overflow-wrap: anywhere;
 }
 
-.guide-text pre {
+.guide-text pre,
+.product pre {
   padding: 0.9rem 1rem;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -763,12 +780,17 @@ a:hover {
 }
 
 /* Copy button, added by script, sitting in the block's top-right corner. */
+.product pre {
+  margin: 0 0 1rem;
+}
+
 .codeblock {
   position: relative;
   margin: 0 0 1rem;
 }
 
-.guide-text .codeblock pre {
+.guide-text .codeblock pre,
+.product .codeblock pre {
   margin: 0;
   padding-right: 5.5rem;
 }
@@ -813,7 +835,8 @@ a:hover {
   white-space: nowrap;
 }
 
-.guide-text pre code {
+.guide-text pre code,
+.product pre code {
   padding: 0;
   background: none;
   font-size: inherit;
